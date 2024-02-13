@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import TekNews from "./components/NewsItem";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -113,6 +114,8 @@ export default function Home() {
           </p>
         </a>
       </div>
+       {/* Add TekNews component */}
+       <TekNews />
     </main>
   );
 }

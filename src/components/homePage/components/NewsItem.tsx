@@ -2,11 +2,14 @@ import React from 'react';
 
 const TekNews: React.FC = () => {
   return (
+
+
     <div className="container mx-auto">
+      <img class="mx-auto mb-4 w-full h-40 line-height-text" src="https://img.freepik.com/premium-photo/3d-rendering-abstract-technology-background-with-glowing-cubes-3d-illustration_538866-3695.jpg?w=1380" alt="aiImage"></img>
       <h1 className="text-3xl font-bold mt-8 mb-4">Breakthrough in Tek Research Unveils New Advancements in Technology</h1>
       <p className="text-gray-700">In a groundbreaking development, researchers in the field of technology, commonly referred to as "tek," have announced significant strides forward in their quest for innovation. This latest breakthrough promises to revolutionize various aspects of our lives, from communication and entertainment to healthcare and beyond.</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+      <div className="grid-auto-rows: min-content lg:grid-cols-3 gap-4 mt-8">
         <div className="border p-4 rounded-lg">
           <h2 className="text-xl font-semibold mb-2">Unparalleled Speed and Reliability in Communication</h2>
           <p className="text-gray-700">One of the key findings of this research is the development of a novel tek-based communication system that boasts unparalleled speed and reliability. Unlike current technologies, which often suffer from latency issues and signal interruptions, this new communication system promises seamless connectivity even in the most remote areas.</p>

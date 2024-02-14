@@ -1,32 +1,54 @@
 import React from 'react';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+
+const queryClient = new QueryClient();
+
+const API_KEY = "x3IXlMwcMl7J2GT0kZZlEnzmNnbhfjqR";
+const SECTION = "Technology";
+
+const fetchTekNews = async () => {
+  const response = await fetch(
+    `https://api.nytimes.com/svc/topstories/v2/${SECTION}.json?api-key=${API_KEY}`
+  );
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+};
 
 const TekNews: React.FC = () => {
+  const { data, isLoading, isError } = useQuery("TekNews", fetchTekNews);
+
+  if (isLoading) return <div className="container mx-auto text-center mt-4">Loading...</div>;
+  if (isError) return <div className="container mx-auto text-center mt-4">Error fetching data</div>;
+
   return (
-
-
     <div className="container mx-auto">
-      <img class="mx-auto mb-4 w-full h-40 line-height-text" src="https://img.freepik.com/premium-photo/3d-rendering-abstract-technology-background-with-glowing-cubes-3d-illustration_538866-3695.jpg?w=1380" alt="aiImage"></img>
-      <h1 className="text-3xl font-bold mt-8 mb-4">Breakthrough in Tek Research Unveils New Advancements in Technology</h1>
-      <p className="text-gray-700">In a groundbreaking development, researchers in the field of technology, commonly referred to as "tek," have announced significant strides forward in their quest for innovation. This latest breakthrough promises to revolutionize various aspects of our lives, from communication and entertainment to healthcare and beyond.</p>
-
-      <div className="grid-auto-rows: min-content lg:grid-cols-3 gap-4 mt-8">
-        <div className="border p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Unparalleled Speed and Reliability in Communication</h2>
-          <p className="text-gray-700">One of the key findings of this research is the development of a novel tek-based communication system that boasts unparalleled speed and reliability. Unlike current technologies, which often suffer from latency issues and signal interruptions, this new communication system promises seamless connectivity even in the most remote areas.</p>
+    <h1 className="text-4xl font-serif font-bold mb-4 text-center text-blue-950">Top Stories - {SECTION}</h1>
+    <div className="flex flex-col gap-4">
+      {data.results.map((story: any) => (
+        <div key={story.url} className="p-4 border rounded">
+          <h2 className="text-xl font-bold mb-2">{story.title}</h2>
+          <p className="text-gray-600">{story.abstract}</p>
+          <a
+            href={story.url}
+            className="text-blue-600 hover:underline mt-2 block"
+          >
+            Read more
+          </a>
         </div>
-        <div className="border p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Advancements in Artificial Intelligence (AI) and Machine Learning</h2>
-          <p className="text-gray-700">Furthermore, the tek research team has unveiled cutting-edge advancements in artificial intelligence (AI) and machine learning algorithms. These advancements are poised to enhance automation processes across industries, leading to increased efficiency and productivity.</p>
-        </div>
-        <div className="border p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Revolutionizing Healthcare and Sustainability</h2>
-          <p className="text-gray-700">In the realm of healthcare, tek researchers have made significant strides in the development of advanced medical devices and treatments. From personalized medicine to non-invasive surgical procedures, these innovations hold the potential to revolutionize healthcare delivery and improve patient outcomes. Moreover, the tek research community is actively exploring sustainable solutions to address pressing environmental challenges.</p>
-        </div>
-      </div>
-
-      <p className="text-gray-700 mt-8">Overall, the recent breakthroughs in tek research underscore the limitless potential of technology to shape the world for the better. As these advancements continue to unfold, they hold the promise of ushering in a new era of progress and prosperity for humanity. Stay tuned for further updates as tek researchers continue to push the boundaries of what's possible in the world of technology.</p>
+      ))}
     </div>
+  </div>
   );
 };
 
-export default TekNews;
+const WrappedTekNews: React.FC = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TekNews />
+    </QueryClientProvider>
+  );
+};
+
+export default WrappedTekNews;

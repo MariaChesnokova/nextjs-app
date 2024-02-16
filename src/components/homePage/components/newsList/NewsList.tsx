@@ -7,12 +7,15 @@ type Story = {
 }
 
 type NewsListProps = {
-  data: {
+  data?: {
     results: Story[];
   };
 }
 const SECTION = "Technology";
 const NewsList: React.FC<NewsListProps> = ({ data }) => {
+  if (!data) {
+    return <div className="container mx-auto text-center mt-4">No data available</div>;
+  }
   return (
     <div className="container mx-auto">
       <h1 className="text-4xl font-serif font-bold mb-4 text-center text-blue-950">Top Stories - {SECTION}</h1>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { useGetTopStoriesQuery } from './hooks/api/TopStoriesHook';
-import NewsList from './components/homePage/components/newsList/NewsList';
+import { useGetTopStoriesQuery } from '@/hooks/api/TopStoriesHook';
+import NewsList from './../newsList/NewsList';
 
 
 const queryClient = new QueryClient();

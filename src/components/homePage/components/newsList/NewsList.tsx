@@ -20,8 +20,8 @@ const NewsList: React.FC<NewsListProps> = ({ data }) => {
     <div className="container mx-auto">
 
       <div className="flex flex-col gap-8">
-      <div className="w-full h-1/2">
-            <img src="/next.jpg" alt="Story" className="w-full h-full object-cover" />
+      <div className="w-full">
+        <img src="/next.jpg" alt="Story" className="w-full" />
         </div>
         {data.results.map((story) => (
           <div key={story.url} className="p-4 border rounded bg-white">

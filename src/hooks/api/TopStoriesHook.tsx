@@ -1,4 +1,4 @@
-import { useQuery, QueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 
 type Story = {
   title: string;

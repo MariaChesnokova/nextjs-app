@@ -1,32 +1,19 @@
 import React from 'react';
 import NewsItem from './components/NewsItem'; 
-import Story from './components/NewsItem'; 
+import { useGetTopStoriesQuery } from '@/hooks/api/TopStoriesHook';
 
-type Story = {
-  title: string;
-  abstract: string;
-  url: string;
-  image: string;
-  time: string;
-}
 
-type NewsListProps = {
-  data?: {
-    results: Story[];
-  };
-}
+const NewsList: React.FC = () => {
+  const { data, isLoading, isError } = useGetTopStoriesQuery("technology");
 
-const NewsList: React.FC<NewsListProps> = ({ data }) => {
-  if (!data || !data.results) {
-    return <div className="container mx-auto text-center mt-4">No data available</div>;
-  }
+  if (isLoading) return <div className="container mx-auto text-center mt-4">Loading...</div>;
+  if (isError) return <div className="container mx-auto text-center mt-4">Error fetching data</div>;
+
   return (
-    <div className="container mx-auto">
-      <div className="flex flex-col gap-8">
-        {data.results.map((story) => (
-          <NewsItem key={story.url} story={story} /> 
-        ))}
-      </div>
+    <div>
+      {data && data.results.map((story, index) => (
+        <NewsItem key={index} data={{ results: [story] }} />
+      ))}
     </div>
   );
 };

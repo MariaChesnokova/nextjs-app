@@ -1,10 +1,6 @@
 import React from "react";
+import { Story } from '@/hooks/api/TopStoriesHook';
 
-type Story = {
-  title: string;
-  abstract: string;
-  url: string;
-};
 
 type NewsItemProps = {
   data?: {

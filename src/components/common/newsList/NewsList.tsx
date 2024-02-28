@@ -1,10 +1,14 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import NewsItem from './components/NewsItem'; 
-import { useGetTopStoriesQuery } from '@/hooks/api/TopStoriesHook';
+import { useGetTopStoriesQuery, Sections } from '@/hooks/api/TopStoriesHook';
 
-
-const NewsList: React.FC = () => {
-  const { data, isLoading, isError } = useGetTopStoriesQuery("technology");
+interface NewsListProps {
+  section: Sections; 
+}
+const NewsList: React.FC<NewsListProps> = ({section}) => {
+  const router = useRouter();
+  const { data, isLoading, isError } = useGetTopStoriesQuery(section);
 
   if (isLoading) return <div className="container mx-auto text-center mt-4">Loading...</div>;
   if (isError) return <div className="container mx-auto text-center mt-4">Error fetching data</div>;

@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-type Story = {
+export type Story = {
   title: string;
   abstract: string;
   url: string;
@@ -10,14 +10,11 @@ type TopStoriesData = {
   results: Story[];
 };
 
-type Sections =
+export type Sections = 
   | "home"
   | "books"
   | "business"
   | "movies"
-  | "science"
-  | "sports"
-  | "sundayreview"
   | "technology";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Story } from '@/hooks/api/TopStoriesHook';
+import Link from 'next/link';
 
 
 type NewsItemProps = {
@@ -23,16 +24,14 @@ const NewsItem: React.FC<NewsItemProps> = ({ data }) => {
         <div className="p-4 border rounded bg-white">
           <h2 className="text-xl font-bold mb-2">{story.title}</h2>
           <p className="text-gray-600">{story.abstract}</p>
-          <a
-            href={story.url}
-            className="text-teal-600 hover:underline font-bold mt-2 block"
-          >
-            Read more
-          </a>
-        </div>
+          <Link href={story.url}>
+            <div className="text-teal-600 hover:underline font-bold mt-2 block cursor-pointer">Read more</div>
+          </Link>
+            
+         </div>
       </div>
     </div>
   );
 };
-
 export default NewsItem;
+
